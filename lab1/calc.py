@@ -2,9 +2,9 @@ import math
 
 
 def calculate(operation, decimals):
-    first_number = operation[0]
-    second_number = operation[1]
-    operator = operation[2]
+    
+    first_number, second_number, operator = operation
+
     try:
         if operator == "+":
             operation.append(first_number + second_number)
