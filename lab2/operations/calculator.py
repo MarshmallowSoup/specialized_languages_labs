@@ -2,10 +2,17 @@ import math
 class Calculator:
 
     def __init__(self, operation=None, first_number=None, second_number=None):
-        self.operation = operation
-        self.first_number = first_number
-        self.second_number = second_number
-        self.result = None
+        if not (isinstance(first_number, (int, float, type(None)))):
+            raise ValueError("first_number must be int, float, or None")
+        if not (isinstance(second_number, (int, float, type(None)))):
+            raise ValueError("second_number must be int, float, or None")
+        if operation not in ("+", "-", "/", "*", "^", "√"):
+            raise ValueError("Invalid operator. Please enter one of: +, -, /, *, ^, √")
+        else:
+            self.operation = operation
+            self.first_number = first_number
+            self.second_number = second_number
+            self.result = None
 
 class Sum(Calculator):
 
@@ -17,7 +24,7 @@ class Sum(Calculator):
         return self.result
 
 
-class Substraction(Calculator):
+class Subtraction(Calculator):
 
     def __init__(self, first_number=None, second_number=None):
         super().__init__('-', first_number, second_number)
@@ -60,6 +67,7 @@ class Power(Calculator):
 class SquareRoot(Calculator):
 
     def __init__(self, first_number=None, second_number=None):
+        print(first_number)
         super().__init__('√', first_number, second_number)
     
     def calculate(self):
