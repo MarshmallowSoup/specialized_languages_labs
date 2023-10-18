@@ -11,7 +11,7 @@ def preview_and_save_art(ascii_art, width):
     file_save = input("Do you want to save it in a file? (y/n): ")
     if file_save == 'y':
         file_name = input("Enter the file name to save the ASCII art: ")
-        with open('./arts/'+ file_name, 'w') as file:
+        with open('./arts/'+ file_name + ".ascii", 'w') as file:
             file.write(formatted_art)
         print(f'ASCII art has been saved in the file {file_name}')
         return 0
@@ -28,7 +28,6 @@ def create_ascii_art():
         ascii_art = pyfiglet.figlet_format(user_input, font=selected_font)
     else:
         ascii_art = pyfiglet.figlet_format(user_input, font=selected_font, width=width)
-    print(ascii_art)
     character = replace_character(ascii_art)
     colored_ascii_art = colored(character, color=selected_color)
     preview_and_save_art(colored_ascii_art, width)
@@ -36,9 +35,12 @@ def create_ascii_art():
 
 def replace_character(input_string):
     character = input("Input a symbol to replace in ASCII art (e.g., @, #, *): ")
-    if (len(input_string)):
-        pattern = r'\S'
-        replaced = re.sub(pattern, character, input_string)
-        return replaced
-    else:
+    if character == " " or "\n":
         return input_string
+    else:
+        if (len(input_string)):
+            pattern = r'\S'
+            replaced = re.sub(pattern, character, input_string)
+            return replaced
+        else:
+            return input_string
