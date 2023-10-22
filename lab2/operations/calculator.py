@@ -14,6 +14,9 @@ class Calculator:
             self.second_number = second_number
             self.result = None
 
+    def calculate():
+        return 0
+
 class Sum(Calculator):
 
     def __init__(self, first_number=None, second_number=None):

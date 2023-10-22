@@ -1,4 +1,3 @@
-
 def choose_size():
     while True:
         try:
