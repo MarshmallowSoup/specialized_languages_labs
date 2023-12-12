@@ -159,3 +159,11 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 lab3/arts/
+lab4/text_output.txt
+lab4/text.txt
+lab7/dataprocess/json.json
+lab7/dataprocess/output.csv
+lab7/dataprocess/output.json
+lab7/json.json
+lab4/text.txt
+lab4/text_output.txt
