@@ -10,8 +10,9 @@ class DataSaver:
             save_format = input("Choose save format ('json', 'table'): ").lower()
             if save_format == "json":
                 json_filename = f"{filename}.json"
+                json_data = json.dumps(self.json_parser.json_data, indent=2)
                 with open(json_filename, 'w') as json_file:
-                    json.dump(self.json_parser.json_data, json_file, indent=2)
+                    json_file.write(json_data)
                 print(f"Data saved as JSON in {json_filename}")
 
             elif save_format == "table":
@@ -21,6 +22,6 @@ class DataSaver:
                     table_file.write(table_data)
                 print(f"Data saved as a table in {table_filename}")
             else:
-                print("Invalid save format. Please choose 'json', 'csv', or 'table'.")
+                print("Invalid save format. Please choose 'json' or 'table'.")
         except Exception as e:
             print(f"Error saving data: {e}")
