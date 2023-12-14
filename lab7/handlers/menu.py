@@ -18,7 +18,7 @@ class Menu:
     def run_menu(self):
         while self.running:
             self.display_menu()
-            choice = input("Enter your choice (1-5): ")
+            choice = input("Enter your choice (1-6): ")
             self.process_choice(choice)
 
     def process_choice(self, choice):
