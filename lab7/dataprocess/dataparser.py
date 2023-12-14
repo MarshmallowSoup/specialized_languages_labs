@@ -96,6 +96,8 @@ class JSONParser:
                 output += f"Status: {status}\n"
                 output += f"URL: {url}\n"
                 output += "-" * 30 + "\n"
+            
+            print(output)        
             return output
 
         except json.JSONDecodeError as e:
@@ -140,3 +142,25 @@ class JSONParser:
             print(output)
 
         return output.strip()
+    def parse_monitor_sla(self):
+        try:
+            data = self.json_data.get("data", {})
+            attributes = data.get("attributes", {})
+
+            monitor_sla = {
+                "id": data.get("id", "N/A"),
+                "type": data.get("type", "N/A"),
+                "availability": attributes.get("availability", "N/A"),
+                "total_downtime": attributes.get("total_downtime", "N/A"),
+                "number_of_incidents": attributes.get("number_of_incidents", "N/A"),
+                "longest_incident": attributes.get("longest_incident", "N/A"),
+                "average_incident": attributes.get("average_incident", "N/A"),
+            }
+
+            print("Parsed Monitor SLA:")
+            for key, value in monitor_sla.items():
+                print(f"{key}: {value}")
+
+
+        except Exception as e:
+            print(f"Error parsing Monitor SLA JSON: {e}")

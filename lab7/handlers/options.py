@@ -10,12 +10,15 @@ class Options:
         self.operation_history = []
 
     def list_all_monitors(self):
-        self.handle_data_fetching("api/v2/monitors", JSONParser.parse_monitor_data)
+        endpoint = "api/v2/monitors"
+        self.handle_data_fetching(endpoint, JSONParser.parse_monitor_data)
+
+        
 
     def get_monitor_availability_summary(self):
         monitor_id = input("Enter the monitor ID: ")
         endpoint = f"api/v2/monitors/{monitor_id}/sla"
-        self.handle_data_fetching(endpoint, JSONParser.json_output)
+        self.handle_data_fetching(endpoint, JSONParser.parse_monitor_sla)
 
     def list_incidents(self):
         five_days_ago = (datetime.now() - timedelta(days=5)).strftime("%Y-%m-%d")
@@ -39,12 +42,10 @@ class Options:
         data = self.api_handler.fetch_data(endpoint=endpoint)
         json_data = JSONParser(data)
         parse_method(json_data)
-        
-        # Ensure the operation_history contains the function names defined in this class
-        function_name = [method for method in dir(self) if callable(getattr(self, method)) and not method.startswith("__") and method == parse_method.__name__]
-        
+
         self.operation_history.append({
-            "operation": function_name[0] if function_name else "Unknown",
+            "endpoint": endpoint,
+            "operation": parse_method.__name__,
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         })
 
@@ -54,4 +55,4 @@ class Options:
     def track_operation_history(self):
         print("Operation History:")
         for operation in self.operation_history:
-            print(f"{operation['timestamp']} - {operation['operation']}")
+            print(f"{operation['timestamp']} - {operation['operation']} - {operation['endpoint']}")
