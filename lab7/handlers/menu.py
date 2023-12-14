@@ -10,9 +10,10 @@ class Menu:
         print("===== Menu =====")
         print("1. List all existing monitors")
         print("2. Get a monitor's availability summary")
-        print("3. List all incidents")
+        print("3. List incidents from 5 days")
         print("4. List incident timeline events")
-        print("5. Exit")
+        print("5. Show history")
+        print("6. Exit")
 
     def run_menu(self):
         while self.running:
@@ -26,13 +27,15 @@ class Menu:
         elif choice == '2':
             self.options.get_monitor_availability_summary()
         elif choice == '3':
-            self.options.list_all_incidents()
+            self.options.list_incidents()
         elif choice == '4':
             self.options.list_incident_timeline_events()
         elif choice == '5':
+            self.options.track_operation_history()
+        elif choice == '6':
             self.exit_menu()
         else:
-            print("Invalid choice. Please enter a number between 1 and 5.")
+            print("Invalid choice. Please enter a number between 1 and 6.")
 
 
     def exit_menu(self):
